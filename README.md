@@ -20,19 +20,17 @@ DocuPy's intuitive tab-based design ensures that each feature is accessible and 
 **3. Convert Python Code to C++**  
 **4. Running Code Functions**
 
-**IMPORTANT WARNING**:
-- The functions that dynamically execute Python or C++ code provided as input.  
-While powerful, this is extremely dangerous if the input code is not trusted. Any malicious code can be executed, including:
-    - Deleting files or directories
-    - Stealing sensitive data (e.g., accessing environment variables or credentials)
-    - Running arbitrary commands that compromise the system
+### **⚠️ Important Warning**
 
-Sharing this `.pynb` notebook or `.py` app containing this code snippet can allow attackers to exploit its functionality by passing harmful or malicious code as input.
+The functions that dynamically execute Python or C++ code provided as input are **extremely powerful** but also **highly dangerous** if the input code is not trusted. 
 
-If you share this notebook or use this function:
-1. Only accept input from trusted sources.
-2. Consider running the code in a sandboxed environment (e.g., virtual machine or container).
-3. Avoid using this function in publicly accessible applications or notebooks without strict validation.
+#### Potential Risks:
+- 🚫 **Deleting files or directories**: The code could remove important files or directories.
+- 🕵️ **Stealing sensitive data**: Access to environment variables, credentials, or other private information.
+- 💻 **Running arbitrary commands**: Malicious commands can be executed, compromising the system.
+
+**Recommendation:**
+Only use this functionality in controlled environments and with trusted input.
 
 ---
 
@@ -67,13 +65,16 @@ DocuPy uses various AI models that require API keys. Follow these steps to confi
   ```env
   OPENAI_API_KEY=your_openai_api_key
   ANTHROPIC_API_KEY=your_anthropic_api_key
-  GEMINI_API_KEY=your_gemini_api_key
+  GOOGLE_API_KEY=your_google_api_key
   ```
 
 - **CodeQwen (Open-Source):** Obtain a Hugging Face token by logging in to your Hugging Face account and generating an access token. Use this token to access a dedicated endpoint for the CodeQwen model.
   ```env
-  HUGGINGFACE_TOKEN=your_huggingface_token
+  HF_TOKEN=your_huggingface_token
+  CODE_QWEN_URL=your_hugging_face_open_source_model_dedicated_endpoint
   ```
+
+Make sure to include these values in your `.env` file to ensure the application can access the required APIs.
 
 ### Special Instructions for Colab Users
 When running DocuPy on Colab, avoid storing API keys in a `.env` file. Instead, add them as Colab secrets for security.
