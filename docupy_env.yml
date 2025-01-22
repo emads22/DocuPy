@@ -1,0 +1,17 @@
+name: docupy
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - pip
+  - python-dotenv
+  - jupyterlab
+  - ipywidgets
+  - pip:
+    - transformers
+    - openai
+    - anthropic
+    - google-generativeai
+    - gradio
+    - huggingface_hub
