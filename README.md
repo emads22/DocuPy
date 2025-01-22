@@ -20,12 +20,12 @@ DocuPy's intuitive tab-based design ensures that each feature is accessible and 
 **3. Convert Python Code to C++**  
 **4. Running Code Functions**
 
-### IMPORTANT WARNING:
-The functions that dynamically execute Python or C++ code provided as input.  
+**IMPORTANT WARNING**:
+- The functions that dynamically execute Python or C++ code provided as input.  
 While powerful, this is extremely dangerous if the input code is not trusted. Any malicious code can be executed, including:
-- Deleting files or directories
-- Stealing sensitive data (e.g., accessing environment variables or credentials)
-- Running arbitrary commands that compromise the system
+    - Deleting files or directories
+    - Stealing sensitive data (e.g., accessing environment variables or credentials)
+    - Running arbitrary commands that compromise the system
 
 Sharing this `.pynb` notebook or `.py` app containing this code snippet can allow attackers to exploit its functionality by passing harmful or malicious code as input.
 
@@ -114,7 +114,7 @@ Ensure all required environment variables are set before launching the app.
 - Click the **`Convert to C++`** button to generate the equivalent C++ code.
 - Optionally, execute the generated Python or C++ code using the respective **`Run`** buttons and review the outputs in the result areas.
 
-### Additional Notes
+#### 4. Additional Notes
 - Ensure your API keys are set up before using closed-tier models.
 - For best performance, choose the model that aligns with your requirements.
 - For security, avoid running untrusted code using the execution features.  
