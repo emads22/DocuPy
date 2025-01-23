@@ -1,6 +1,8 @@
 
 # DocuPy
 
+![DocuPy_logo](./assets/images/DocuPy_logo.png)
+
 ## Overview
 
 **DocuPy** is an all-in-one tool designed to enhance productivity and streamline Python code workflows. With a user-friendly interface built using Gradio, DocuPy provides powerful utilities for documenting, testing, and converting Python code into C++. By leveraging state-of-the-art AI models like GPT, Claude, Gemini, and CodeQwen, this application offers developers advanced capabilities to:
