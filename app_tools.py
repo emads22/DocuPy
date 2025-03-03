@@ -47,6 +47,7 @@ def stream_gemini(system_prompt, user_prompt):
         yield reply.replace("```python\n", "").replace("```cpp\n", "").replace("```", "")
 
 def stream_code_qwen(system_prompt, user_prompt):
+    eom = "<|im_end|>"  # CodeQwen End-Of-Message token
     tokenizer = AutoTokenizer.from_pretrained(CODE_QWEN_MODEL)
     model_input = tokenizer.apply_chat_template(
         conversation=[
@@ -65,7 +66,7 @@ def stream_code_qwen(system_prompt, user_prompt):
     reply = ""
     for chunk in stream:
         reply += chunk.token.text or ""
-        yield reply.replace("```python\n", "").replace("```cpp\n", "").replace("```", "")
+        yield reply.replace("```python\n", "").replace("```cpp\n", "").replace("```", "").replace(eom, "")
 
 def set_prompts(user_input, action):
     action = action.lower()
@@ -85,22 +86,29 @@ def set_prompts(user_input, action):
     return system_prompt, user_prompt
 
 def stream_response(user_input, model, action):
-    system_prompt, user_prompt = set_prompts(user_input, action)
-    if not all((system_prompt, user_prompt)):
-        raise ValueError("Unknown Action")
+    try:
+        system_prompt, user_prompt = set_prompts(user_input, action)
+        if not all((system_prompt, user_prompt)):
+            raise ValueError("Invalid action provided. Please select a valid action.")
 
-    match model:
-        case "GPT":
-            yield from stream_gpt(system_prompt, user_prompt)
+        match model:
+            case "GPT":
+                yield from stream_gpt(system_prompt, user_prompt)
 
-        case "Claude":
-            yield from stream_claude(system_prompt, user_prompt)
+            case "Claude":
+                yield from stream_claude(system_prompt, user_prompt)
 
-        case "Gemini":
-            yield from stream_gemini(system_prompt, user_prompt)
+            case "Gemini":
+                yield from stream_gemini(system_prompt, user_prompt)
 
-        case "CodeQwen":
-            yield from stream_code_qwen(system_prompt, user_prompt)
+            case "CodeQwen":
+                yield from stream_code_qwen(system_prompt, user_prompt)
+
+            case _:
+                raise ValueError(f"Unsupported model '{model}'. Please choose a valid model.")
+
+    except Exception as e:
+        yield f"❌ Unable to generate a response. Please try again later.\n\nError: {str(e)}\n"
 
 def generate_comments(python_code, selected_model):
     for model in MODELS_IN_USE:

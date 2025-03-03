@@ -45,18 +45,21 @@ cd DocuPy
 ```
 
 ### Install Dependencies
-If you’re running this project on **Google Colab**, ensure you install the required libraries by executing the following command:
+- Navigate to the project directory and activate the provided Conda environment to ensure all dependencies are installed:
 
-```bash
-!pip install -q openai anthropic python-dotenv gradio huggingface_hub transformers
-```
+    ```bash
+    conda env create -f .\docupy_env.yml
+    conda activate docupy
+    ```
 
-For local installations, navigate to the project directory and activate the provided Conda environment to ensure all dependencies are installed:
+- If you're running the Jupyter notebook `docupy.ipynb` inside the `assets/study` folder on Google Colab, make sure to install the required libraries by executing the following command:
 
-```bash
-conda env create -f .\docupy_env.yml
-conda activate docupy
-```
+    ```bash
+    !pip install -q openai anthropic python-dotenv gradio huggingface_hub transformers
+    ```
+
+    You can access the notebook directly on **Google Colab** using the following link:
+    [docupy.ipynb](https://colab.research.google.com/drive/113bjoZB0vlZDPqy7ugp4SwbgpuaVfoEJ)
 
 ### Set Up API Keys
 DocuPy uses various AI models that require API keys. Follow these steps to configure them:

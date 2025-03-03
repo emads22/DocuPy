@@ -1,6 +1,15 @@
 # Ignore environment variables
 .env
 **/.env
+config.json
+secrets.json
+**/secrets.json
+*.key
+*.pem
+*.crt
+
+# Ignore toml files
+*.toml
 
 # Ignore Jupyter notebook checkpoint files
 .ipynb_checkpoints/
@@ -10,12 +19,63 @@
 *.pyc
 __pycache__/
 
-# Ignore conda environment files
+# Ignore Python virtual environments
+venv/
+env/
+**/venv/
+**/env/
+
+# Ignore conda environment files and cache
+*.yaml
 *.conda
 *.pkl
+conda-meta/
+pkgs/
 
-# Ignore common system files
+# Ignore logs and debugging files
+*.log
+logs/
+**/*.log
+debug.log
+nohup.out
+
+# Ignore system files
 .DS_Store
+*.swp
+*.swo
+*.tmp
+*.bak
+*.orig
 
-# Ignore build directories
+# Ignore build directories and dependencies
 /build/
+*.egg
+*.egg-info/
+dist/
+site-packages/
+pip-wheel-metadata/
+
+# Ignore Modal deploy directories
+modal_deploy/
+**/modal_deploy/
+
+# Ignore pickled data folder
+pickled_data/
+**/pickled_data/
+
+# Ignore development tools and IDE files
+.vscode/
+.idea/
+*.iml
+
+# Ignore large datasets and database files
+data/
+datasets/
+*.csv
+*.tsv
+*.parquet
+*.sqlite
+*.db
+*.h5
+*.npy
+*.npz

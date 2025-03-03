@@ -9,10 +9,6 @@ from pathlib import Path
 # Load the .env file
 load_dotenv()
 
-# Log in to Hugging Face using the token and add it to git credentials
-hf_token = os.getenv('HF_TOKEN')
-login(token=hf_token, add_to_git_credential=True)
-
 # Endpoint URL for accessing the Code Qwen model through Hugging Face
 CODE_QWEN_URL = os.getenv('CODE_QWEN_URL')
 
@@ -20,7 +16,8 @@ CODE_QWEN_URL = os.getenv('CODE_QWEN_URL')
 gpt = openai.OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
 claude = anthropic.Anthropic(api_key=os.getenv('ANTHROPIC_API_KEY'))
 google_genai.configure(api_key=os.getenv('GOOGLE_API_KEY'))
-code_qwen = InferenceClient(CODE_QWEN_URL, token=hf_token)
+# code_qwen = InferenceClient(CODE_QWEN_URL, token=hf_token)
+code_qwen = InferenceClient(CODE_QWEN_URL, token=os.getenv('HF_TOKEN'))
 
 # =============================={ Models and other constants }==============================
 
@@ -171,3 +168,68 @@ Convert the following Python code into C++:
 ``` 
 """
     return user_prompt
+
+# =============================={ User Interface Styling }==============================
+
+# CSS styles for customizing the appearance of the Gradio UI elements.
+UI_CSS = """
+h1 {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #e67e22; /* Vibrant Orange */
+    margin-bottom: 0.5rem;
+}
+h3 {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #4a90e2; /* Vibrant Blue */
+    margin-bottom: 1.5rem;
+}
+.python { 
+    background-color: #377ef0; 
+    color: #ffffff; 
+    padding: 0.5em; 
+    border-radius: 5px; /* Slightly rounded corners */
+}
+.cpp { 
+    background-color: #00549e; 
+    color: #ffffff; 
+    padding: 0.5em; 
+    border-radius: 5px; 
+}
+.model { 
+    background-color: #17a2b8; /* Vibrant cyan color */
+    color: white; 
+    font-size: 1.2em; 
+    padding: 0.5em; 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer; 
+}
+.button { 
+    height: 4em; 
+    font-size: 1.5em; 
+    padding: 0.5em 1em; 
+    background-color: #e67e22; /* Vibrant orange */
+    color: white; 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer; 
+}
+.run-button { 
+    height: 3em; 
+    font-size: 1.5em; 
+    padding: 0.5em 1em; 
+    background-color: #16a085; /* Rich teal color */
+    color: white; 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer; 
+}
+.button:hover, .run-button:hover {
+    background-color: #2c3e50; /* Dark navy for hover effect */
+    color: #fff; 
+}
+"""
